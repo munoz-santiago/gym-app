@@ -14,7 +14,7 @@ const useLoginScreen = (navigation: any) => {
     const handleChangePassword = (val: string) => setPassword(val.trim());
 
     const handlePressLoginButton = () => {
-        navigation.navigate(Routes.HOME);
+        navigation.replace(Routes.HOME);
     };
 
     return {
