@@ -1,7 +1,9 @@
-import Routes from "../../routes";
+import { Actions, useDispatcher } from "../../action_dispatcher";
 import { useEffect, useState } from "react";
 
 const useLoginScreen = (navigation: any) => {
+    const dispatcher = useDispatcher();
+
     const [isValidForm, setIsValidForm] = useState(false);
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -14,7 +16,7 @@ const useLoginScreen = (navigation: any) => {
     const handleChangePassword = (val: string) => setPassword(val.trim());
 
     const handlePressLoginButton = () => {
-        navigation.replace(Routes.HOME);
+        dispatcher.dispatch(Actions.login, { token: 'Burned Token :)' });
     };
 
     return {
