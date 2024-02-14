@@ -61,8 +61,8 @@ export const useDispatcher = () => {
 
 
 export enum Actions {
-    logout = 'action--logout',
-    login = 'action--login',
+    // logout = 'action--logout',
+    // login = 'action--login',
 
     store_write = 'action--store-write',
     store_read = 'action--store-read',

@@ -38,6 +38,8 @@ export const GlobalContextWrapper = ({ children }: { children: any; }) => {
         });
     };
 
+    console.info('LogedInContextMiddleware --> ', state)
+
     return (
         <Context.Provider value={state}>
             {!state.hasErrorWhenLoading ? (

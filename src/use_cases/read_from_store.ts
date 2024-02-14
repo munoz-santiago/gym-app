@@ -1,4 +1,3 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ActionCallback } from "../ui/action_dispatcher";
 
 interface Props {
@@ -7,7 +6,8 @@ interface Props {
 
 class ReadFromStore implements ActionCallback {
     async execute(payload: Props): Promise<string | null> {
-        return await AsyncStorage.getItem(payload.key);
+        // TODO :: Pendiente!!! Se puede usar SQLite and Realm
+        return null;
     }
     
 }
