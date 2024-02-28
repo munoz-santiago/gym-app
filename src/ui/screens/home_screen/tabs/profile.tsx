@@ -3,12 +3,18 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import Button from "../../../components/Button";
 import { useDispatcher, Actions } from "../../../action_dispatcher";
+import { LOCAL_STORAGE_LOGIN_TOKEN_KEY } from "../../../../constants";
+import Routes from "../../../routes";
 
-const ProfileTab = () => {
+const ProfileTab = ({ navigator }: any) => {
     const dispatcher = useDispatcher();
 
-    const handlePressLogoutButton = () => {
-        dispatcher.dispatch(Actions.logout);
+    const handlePressLogoutButton = async () => {
+        await dispatcher.dispatch(Actions.store_write, {
+            key: LOCAL_STORAGE_LOGIN_TOKEN_KEY,
+            value: '',
+        });
+        navigator.reset({ index: 0, routes: [{ name: Routes.LOGIN }] });
     };
 
     return (

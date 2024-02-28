@@ -1,4 +1,6 @@
 import { ActionCallback } from "../ui/action_dispatcher";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 interface Props {
     key: string;
@@ -7,7 +9,7 @@ interface Props {
 
 class WriteInStore implements ActionCallback {
     async execute(payload: Props): Promise<void> {
-        // TODO :: Pendiente!!! Se puede usar SQLite and Realm
+        await AsyncStorage.setItem(payload.key, payload.value);
     }
     
 }

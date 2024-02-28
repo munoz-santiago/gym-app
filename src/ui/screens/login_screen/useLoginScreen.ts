@@ -1,5 +1,7 @@
-import { Actions, useDispatcher } from "../../action_dispatcher";
 import { useEffect, useState } from "react";
+import { LOCAL_STORAGE_LOGIN_TOKEN_KEY } from "../../../constants";
+import { Actions, useDispatcher } from "../../action_dispatcher";
+import Routes from "../../routes";
 
 const useLoginScreen = (navigation: any) => {
     const dispatcher = useDispatcher();
@@ -15,8 +17,14 @@ const useLoginScreen = (navigation: any) => {
     const handleChangeUsername = (val: string) => setUsername(val.trim());
     const handleChangePassword = (val: string) => setPassword(val.trim());
 
-    const handlePressLoginButton = () => {
-        dispatcher.dispatch(Actions.login, { token: 'Burned Token :)' });
+    const handlePressLoginButton = async () => {
+        await dispatcher.dispatch(Actions.store_write, {
+            key: LOCAL_STORAGE_LOGIN_TOKEN_KEY,
+            value: JSON.stringify({
+                token: 'Burned Login token :)'
+            }),
+        });
+        navigation.navigate(Routes.HOME);
     };
 
     return {
