@@ -1,12 +1,12 @@
-import { Text, View } from "react-native";
+import { Text, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
-import Button from "../../../components/Button";
-import { useDispatcher, Actions } from "../../../action_dispatcher";
-import { LOCAL_STORAGE_LOGIN_TOKEN_KEY } from "../../../../constants";
-import Routes from "../../../routes";
+import Button from '../../../components/Button';
+import { useDispatcher, Actions } from '../../../action_dispatcher';
+import { LOCAL_STORAGE_LOGIN_TOKEN_KEY } from '../../../../constants';
+import Routes from '../../../routes';
 
-const ProfileTab = ({ navigator }: any) => {
+const ProfileTab = () => {
     const dispatcher = useDispatcher();
 
     const handlePressLogoutButton = async () => {
@@ -14,7 +14,11 @@ const ProfileTab = ({ navigator }: any) => {
             key: LOCAL_STORAGE_LOGIN_TOKEN_KEY,
             value: '',
         });
-        navigator.reset({ index: 0, routes: [{ name: Routes.LOGIN }] });
+
+        await dispatcher.dispatch(Actions.navigate, {
+            route: Routes.LOGIN,
+            reset: true,
+        });
     };
 
     return (

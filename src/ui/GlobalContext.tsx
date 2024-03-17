@@ -1,56 +1,43 @@
 import { createContext, useState, useContext } from "react";
-import LogedInContextMiddleware from "./loged_in_context_middleware";
 
-const initialContextState = {
-    isInitialized: false,
-    hasErrorWhenLoading: false,
-    errorMessage: '',
-
+interface Contexto {
     user: {
-        isLoguedIn: false,
-        token: null,
+        isLoguedIn: boolean;
+        token: string;
     }
+
+    loginUser: (token: string) => void;
+    logoudUser: () => void;
+}
+
+const Context = createContext<Contexto>({} as Contexto);
+
+const USER_INITIAL_STATE = {
+    isLoguedIn: false,
+    token: '',
 };
 
-const Context = createContext(initialContextState);
+export const GlobalContextProvider = ({ children }: { children: any; }) => {
+    const [state, setState] = useState({
+        user: USER_INITIAL_STATE,
 
-
-export const GlobalContextWrapper = ({ children }: { children: any; }) => {
-    const [state, setState] = useState(initialContextState);
-
-    const handleLoadingMiddlewareError = (error?: string) => {
-        setState({
-            ...initialContextState,
-            hasErrorWhenLoading: true,
-            errorMessage: error || 'Error loading application.',
-        });
-    };
-
-    const handleSuccessLoginMiddleware = (token: string) => {
-        setState((prevState: any) => {
-            return ({
+        loginUser: (token: string) => {
+            setState((prevState) => ({
                 ...prevState,
                 user: {
                     isLoguedIn: true,
                     token,
-                }
-            });
-        });
-    };
-
-    console.info('LogedInContextMiddleware --> ', state)
+                },
+            }));
+        },
+        logoudUser: () => {
+            setState((prevState) => ({ ...prevState, user: USER_INITIAL_STATE }));
+        }
+    });
 
     return (
         <Context.Provider value={state}>
-            {!state.hasErrorWhenLoading ? (
-                <LogedInContextMiddleware onError={handleLoadingMiddlewareError} onSuccess={handleSuccessLoginMiddleware} context={state}>
-                    {children}
-                </LogedInContextMiddleware>
-            ) : (
-                <>
-                    {children}
-                </>
-            )}
+           {children}
         </Context.Provider>
     );
 };

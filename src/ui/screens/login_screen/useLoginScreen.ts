@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { LOCAL_STORAGE_LOGIN_TOKEN_KEY } from "../../../constants";
 import { Actions, useDispatcher } from "../../action_dispatcher";
 import Routes from "../../routes";
+import { useGlobalContext } from "../../GlobalContext";
 
 const useLoginScreen = (navigation: any) => {
     const dispatcher = useDispatcher();
+    const { loginUser } = useGlobalContext();
 
     const [isValidForm, setIsValidForm] = useState(false);
     const [username, setUsername] = useState<string>('');
@@ -18,13 +20,13 @@ const useLoginScreen = (navigation: any) => {
     const handleChangePassword = (val: string) => setPassword(val.trim());
 
     const handlePressLoginButton = async () => {
+        const token = 'Burned Login token :)';
         await dispatcher.dispatch(Actions.store_write, {
             key: LOCAL_STORAGE_LOGIN_TOKEN_KEY,
-            value: JSON.stringify({
-                token: 'Burned Login token :)'
-            }),
+            value: JSON.stringify({ token }),
         });
-        navigation.navigate(Routes.HOME);
+        loginUser(token);
+        navigation.navigate(Routes.HOME.home);
     };
 
     return {

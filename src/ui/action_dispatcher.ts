@@ -66,4 +66,6 @@ export enum Actions {
 
     store_write = 'action--store-write',
     store_read = 'action--store-read',
+
+    navigate = 'action--navigate',
 };

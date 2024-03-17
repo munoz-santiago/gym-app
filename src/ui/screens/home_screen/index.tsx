@@ -18,7 +18,7 @@ const tabs = [
     { id: HomeScreenTabs.anotherTab, iconName: 'cancel', screen: WorkoutTab },
 ];
 
-const HomeScreen = ({ navigation }: any) => {
+const HomeScreen = () => {
     return (
         <SafeArea>
             <Tab.Navigator initialRouteName={HomeScreenTabs.workout}>

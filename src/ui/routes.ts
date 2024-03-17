@@ -1,6 +1,8 @@
-enum Routes  {
-    LOGIN = 'login',
-    HOME = 'home',
+const Routes = {
+    LOGIN: 'login',
+    HOME: {
+        home: 'home',
+    },
 };
 
 export default Routes;
