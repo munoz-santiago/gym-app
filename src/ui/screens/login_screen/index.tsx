@@ -3,9 +3,11 @@ import { StyleSheet, View, Text } from "react-native";
 import TextBoxControl from "../../components/TextBoxControl";
 import Button from "../../components/Button";
 import useLoginScreen from "./useLoginScreen";
+import useNavigateIfLogedIn from "./useNavigateIfLogedIn";
 
 const LoginScreen = ({ navigation }: any) => {
     const { state, actions } = useLoginScreen(navigation);
+    useNavigateIfLogedIn(navigation);
 
     return (
         <View style={styles.container}>

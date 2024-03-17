@@ -26,6 +26,7 @@ const useLoginScreen = (navigation: any) => {
             value: JSON.stringify({ token }),
         });
         loginUser(token);
+
         navigation.navigate(Routes.HOME.home);
     };
 

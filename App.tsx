@@ -18,7 +18,7 @@ export default function App() {
         <GlobalContextProvider>
           <UseCasesRegister />
 
-          <Stack.Navigator initialRouteName={Routes.HOME.home}>
+          <Stack.Navigator initialRouteName={Routes.LOGIN}>
             <Stack.Screen name={Routes.LOGIN} component={LoginScreen} options={{ headerShown: false }} />
 
             <Stack.Screen
